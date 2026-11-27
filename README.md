@@ -434,16 +434,3 @@ Do not consider the installation complete until all of these are confirmed:
 - [ ] exam.db survives service restart; existing deadlines are preserved.
 
 The existing public-service tests establish the custom bot's intended workflow, not compatibility with an unseen self-hosted deployment. If HTTP works but gateway events or model parsing fail, inspect the installed Fluxer and fluxer.py versions before changing permissions or tokens repeatedly.
-
-## 16. Reference documentation
-
-- Fluxer API and endpoint discovery: https://docs.fluxer.com/
-- Applications: https://docs.fluxer.com/http-api/applications/
-- OAuth2 installation: https://docs.fluxer.com/http-api/oauth2/
-- Roles/permissions: https://docs.fluxer.com/http-api/permissions/
-- Member role operations: https://docs.fluxer.com/http-api/guild-members/
-- Messages/attachment uploads: https://docs.fluxer.com/http-api/messages/
-- Python wrapper: https://github.com/Fluxer-py/fluxer.py
-- systemd service options: https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html
-
-This is a guide for the supplied custom bot, not an official Fluxer installer. Validate the full workflow on the target instance before production use.

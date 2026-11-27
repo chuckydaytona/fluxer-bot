@@ -228,7 +228,7 @@ Save changes atomically where practical (edit a temporary file, validate it, the
 
 Active attempts retain their stored question snapshot and deadline. Their local image file contents are not snapshotted: keep old images available and use new filenames for changed pictures until old attempts are over. Missing images cause startup/configuration checks or question delivery to fail.
 
-## 9. Run a foreground smoke test
+## 9. Run test
 
 Before running, confirm that FLUXER_API_URL is explicitly set to the self-hosted instance, and that the token and GUILD_ID were created there. The bot is a client of your existing Fluxer API; starting it will not start or repair the Fluxer instance.
 
@@ -297,24 +297,7 @@ Ctrl+C exits the log viewer, not the service. You may close SSH or switch off yo
 
 The bot needs outbound access to the instance API/gateway and upload destinations. It does not run a public HTTP server, so do not open an inbound port just for this bot.
 
-## 11. Test the complete candidate flow
-
-Use an ordinary account, not an administrator.
-
-1. Invite it while the bot is running. Confirm Pending appears and its private test channel is created.
-2. Confirm it sees #welcome and its own test channel, but not main channels, #test-results, or other candidates' channels.
-3. Type !start and confirm the configured time limit appears.
-4. Submit multiple-choice letters and open-ended responses. Verify picture delivery.
-5. Confirm automatic score excludes manual-review questions and the results contain the candidate's numeric Member ID.
-6. In #test-results, as the owner or an authorized moderator, send `!approve USER_ID` using that numeric ID.
-7. Confirm Verified is assigned, Pending removed, and normal channels become visible. The private test channel remains.
-8. Verify an unauthorized account cannot approve. A moderator needs both results-channel posting access and an authorized role ID.
-9. Test expiry using a temporary short duration with a fresh attempt. Restore the intended duration afterwards.
-10. Test a service restart during an attempt: the stored deadline must remain unchanged.
-
-The approval command accepts completed or expired attempts; it does not enforce a minimum score. Review open-ended answers and decide before issuing it. Plain `approve` without the ! prefix/user ID is not a command.
-
-## 12. Routine operation
+## 11. Routine operation
 
 | Task | Action |
 | --- | --- |

@@ -19,39 +19,7 @@ Completing a test does not grant Verified automatically. Test channels are not d
 | `princessmario.jpg` and any other referenced images | Add your sample images here |
 | `README.md` | This guide |
 
-## 3. Discover your instance’s API address
-
-Open this address in your browser, replacing the example domain:
-
-```text
-https://YOUR-FLUXER-DOMAIN/.well-known/fluxer
-```
-
-Locate `endpoints.api_public` in the returned JSON. Append `/v1` to that base (remove a trailing slash first). For example, if the returned value is `https://chat.example/api`, set:
-
-```dotenv
-FLUXER_API_URL=https://chat.example/api/v1
-```
-
-This is an example only. Do not leave the bot pointing to the public `fluxer.com` service when using a your self-hosted instance token. Do not guess the API path from the website URL. Also check the discovered `endpoints.gateway`: the VPS must be able to reach that WebSocket endpoint.
-
-### Optional discovery check from the VPS
-
-After installing curl and Python, run this without a bot token. Substitute the real instance origin:
-
-```bash
-curl --fail --show-error --silent https://YOUR-FLUXER-DOMAIN/.well-known/fluxer | python3 -m json.tool
-```
-
-Check that the response is JSON rather than an HTML login page, CDN challenge, or proxy error. Copy the exact advertised API base into .env with `/v1` appended once. Public API and gateway addresses can use different hostnames.
-
-The current bot is configured using the discovered address; it does not automatically discover endpoints from the instance name. It has no separate FLUXER_GATEWAY_URL configuration setting.
-
-The wrapper obtains its gateway information through the configured API. Confirm both HTTP and gateway connectivity during the live test; setting the API URL alone is not proof that every self-hosted Fluxer version is compatible.
-
-Use working HTTPS/WSS and valid certificates. For a private certificate authority, install that CA appropriately on the host; do not disable certificate verification.
-
-## 4. Create a bot application on your instance
+## 3. Create a bot application on your instance
 
 Open your self-hosted instance’s web client and sign in with an account that can create applications and manage the target community. If using a desktop client, first confirm it is connected to the self-hosted instance. Create and authorize the application there, rather than on public Fluxer.
 
@@ -75,7 +43,7 @@ Grant these bot permissions:
 
 The bot must be able to create private channels and set permission overwrites, assign Verified/Pending, and post images. Administrator permission is not required. Verify that it retains access in channels where @everyone is denied.
 
-## 5. Create roles and configure permissions
+## 4. Create roles and configure permissions
 
 Create `Pending`, `Verified`, and a moderator role if needed. Put the bot's role above Pending and Verified in the role hierarchy. Give the bot Manage Roles. Do not give Pending or Verified administrator/moderation powers.
 
@@ -115,7 +83,7 @@ The bot creates these outside a category, with @everyone denied viewing and dire
 
 Ordinary moderators do not automatically receive access to each private test channel. They review the copied answers/images in #test-results. Administrators can have broader access by virtue of their permissions.
 
-## 6. Collect instance-specific IDs
+## 5. Collect instance-specific IDs
 
 Enable Developer mode if required and use Copy ID in the relevant menus.
 
@@ -130,7 +98,7 @@ Enable Developer mode if required and use Copy ID in the relevant menus.
 
 Use role IDs for MODERATOR_ROLE_IDS, not individual moderator user IDs. The configured OWNER_ID is authorized independently. Merely naming a role “Moderator” or giving someone a server permission does not authorize the command: its ID must be configured.
 
-## 7. Install on the VPS
+## 6. Install on the VPS
 
 Connect to the rented VPS using your normal SSH account. The commands below run on the VPS, not on a Windows desktop. Keep Fluxer running as usual while installing the separate bot service.
 
@@ -179,7 +147,7 @@ Dependencies are not version-pinned in this example. After successful testing, r
 sudo -u fluxer-examiner /opt/fluxer-examiner/.venv/bin/python -m pip freeze | sudo tee /opt/fluxer-examiner/requirements.lock.txt >/dev/null
 ```
 
-## 8. Create your .env
+## 7. Create your .env
 
 ```bash
 sudo -u fluxer-examiner nano /opt/fluxer-examiner/.env
@@ -208,7 +176,7 @@ sudo chmod 600 /opt/fluxer-examiner/.env
 
 Do not publish the file or put the token in shell commands, screenshots, or support messages. The bot reads `.env` beside bot.py. Environment variables already set in the process can take precedence over python-dotenv values; avoid stale conflicting service environment settings.
 
-## 9. Configure questions and duration
+## 8. Configure questions and duration
 
 ### Duration: config.json
 
@@ -260,7 +228,7 @@ Save changes atomically where practical (edit a temporary file, validate it, the
 
 Active attempts retain their stored question snapshot and deadline. Their local image file contents are not snapshotted: keep old images available and use new filenames for changed pictures until old attempts are over. Missing images cause startup/configuration checks or question delivery to fail.
 
-## 10. Run a foreground smoke test
+## 9. Run a foreground smoke test
 
 Before running, confirm that FLUXER_API_URL is explicitly set to the self-hosted instance, and that the token and GUILD_ID were created there. The bot is a client of your existing Fluxer API; starting it will not start or repair the Fluxer instance.
 
@@ -274,7 +242,7 @@ In #test-results send `!ping`. The bot should reply. The configured owner may se
 
 Stop the foreground process with Ctrl+C before starting the service below. Run only one copy of the bot against this community/database.
 
-## 11. Keep it running with systemd
+## 10. Keep it running with systemd
 
 Create `/etc/systemd/system/fluxer-examiner.service`:
 
@@ -329,7 +297,7 @@ Ctrl+C exits the log viewer, not the service. You may close SSH or switch off yo
 
 The bot needs outbound access to the instance API/gateway and upload destinations. It does not run a public HTTP server, so do not open an inbound port just for this bot.
 
-## 12. Test the complete candidate flow
+## 11. Test the complete candidate flow
 
 Use an ordinary account, not an administrator.
 
@@ -346,7 +314,7 @@ Use an ordinary account, not an administrator.
 
 The approval command accepts completed or expired attempts; it does not enforce a minimum score. Review open-ended answers and decide before issuing it. Plain `approve` without the ! prefix/user ID is not a command.
 
-## 13. Routine operation
+## 12. Routine operation
 
 | Task | Action |
 | --- | --- |
@@ -386,7 +354,7 @@ sudo systemctl start fluxer-examiner
 
 Have the candidate type !start in their existing private test channel. If testing the gate again, remove Verified separately. Do not delete the whole database to reset one person.
 
-## 14. Troubleshooting and current limits
+## 13. Troubleshooting and current limits
 
 | Symptom | Check |
 | --- | --- |
@@ -416,7 +384,7 @@ Known behavior and limits of this version:
 - The bot copies text answers and image prompts to results. It does not grade open-ended responses or provide a separate manual-grading UI.
 - Role assignment alone does not enforce the gate. Check permissions with a real ordinary-member account before admitting users.
 
-## 15. Self-hosted deployment acceptance checklist
+## 14. Self-hosted deployment acceptance checklist
 
 Do not consider the installation complete until all of these are confirmed:
 

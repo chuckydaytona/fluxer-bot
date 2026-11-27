@@ -1,31 +1,3 @@
-# Fluxer Examiner — self-hosted Fluxer README
-
-This README explains how to deploy the examiner bot alongside an existing self-hosted Fluxer instance running on a rented virtual private server (VPS) in the Netherlands. VS Code is not required: the VPS runs the bot as a background service, independently of anyone’s personal computer.
-
-The Linux commands below assume Ubuntu/Debian with systemd and sudo access. For another operating system, adapt the package and service commands. The instance domain, VPS operating system, and installed Fluxer version have not been confirmed. Substitute your own domain, API address, credentials, and IDs. The Netherlands location does not change the installation steps or test-duration settings.
-
-## Before you begin: this is an existing self-hosted instance
-
-This guide assumes Fluxer is already installed and working on your VPS. This README installs only the examiner bot; it does not reinstall Fluxer or change its database, reverse proxy, domains, or containers.
-
-There are two distinct services:
-
-| Service | Responsibility | Where it runs |
-| --- | --- | --- |
-| Self-hosted Fluxer | Accounts, communities, channels, API, gateway, file storage | Existing Fluxer deployment |
-| Examiner bot | Questions, timers, answer recording, moderator approval | Separate Python process on the same VPS or another reachable host |
-
-An **instance** is the whole Fluxer installation; a **community/server** is a group within it. GUILD_ID identifies the community, not the instance. This bot is configured for one community per running deployment.
-
-### Deployment checklist
-
-- Obtain your instance’s actual origin, for example `https://chat.example.org`; use the real domain in the instructions below.
-- Create the bot application and obtain its token **inside that instance**. Public Fluxer credentials and community IDs are not substitutes.
-- Obtain the instance's API base through discovery and explicitly set FLUXER_API_URL. The current code otherwise defaults to public Fluxer.
-- Collect every account/channel/role ID from the target instance.
-- Keep the bot's files and exam.db separate from Fluxer's own application files and database.
-- Verify the API, gateway, and image upload behavior against the installed instance version before enabling real applications.
-
 ## 1. What this bot does
 
 1. While running, it detects a human member joining the configured community.

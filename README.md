@@ -9,14 +9,14 @@
 
 Completing a test does not grant Verified automatically. Test channels are not deleted automatically. Channel permissions, rather than the Pending role alone, control access to the rest of the community.
 
-## 2. Files to receive
+## 2. Files
 
 | File | Purpose |
 | --- | --- |
-| `bot.py` | Latest bot implementation, including `!approve` and Pending roles |
-| `questions.json` | Editable question list and answer keys |
+| `bot.py` | Main bot script|
+| `questions.json` | The test |
 | `config.json` | Test duration |
-| `princessmario.jpg` and any other referenced images | Local picture-question attachments |
+| `princessmario.jpg` and any other referenced images | Add your sample images here |
 | `README.md` | This guide |
 
 Create the dependency list and environment file below. Do not use someone else's `.env`, `.venv`, or `exam.db`. Start with your own token and empty database. Keep question image filenames identical, including letter case on Linux.

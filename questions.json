@@ -1,0 +1,64 @@
+[
+  {
+    "text": "Best Mentallo & the Fixer song:",
+    "correct": "A",
+    "type": "multiple_choice",
+    "options": {
+      "A": "Ritual",
+      "B": "H.I.V. (Test Positive)",
+      "C": "Freebird",
+      "D": "Wonderwall"
+    }
+  },
+  {
+    "text": "How many icons pinned to my taskbar:",
+    "correct": "D",
+    "type": "multiple_choice",
+    "options": {
+      "A": "Three",
+      "B": "Fifteen",
+      "C": "Twenty",
+      "D": "Twenty one"
+    }
+  },
+  {
+    "text": "Favorite person from the Dune server:",
+    "correct": "C",
+    "type": "multiple_choice",
+    "options": {
+      "A": "Chucky",
+      "B": "Chucky",
+      "C": "Chucky",
+      "D": "Chuck-o-rama"
+    }
+  },
+  {
+    "text": "How many ass cheeks currently hanging out of my slutty Andrew Tate capris:",
+    "correct": "B",
+    "type": "multiple_choice",
+    "options": {
+      "A": "One",
+      "B": "Two"
+    }
+  },
+  {
+    "text": "Capital of Uzbekistan:",
+    "correct": "D",
+    "type": "multiple_choice",
+    "options": {
+      "A": "Jizzax",
+      "B": "Qarshi",
+      "C": "Nukus",
+      "D": "Tashkent"
+    }
+  },
+  {
+    "type": "open_ended",
+    "text": "Why would you like to join this community?"
+  },
+  {
+    "type": "open_ended",
+    "text": "Tell me what is silly or impossible about this picture:",
+    "image": "princessmario.jpg"
+  }
+]

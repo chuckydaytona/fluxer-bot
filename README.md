@@ -19,8 +19,6 @@ Completing a test does not grant Verified automatically. Test channels are not d
 | `princessmario.jpg` and any other referenced images | Add your sample images here |
 | `README.md` | This guide |
 
-Create the dependency list and environment file below. Do not use someone else's `.env`, `.venv`, or `exam.db`. Start with your own token and empty database. Keep question image filenames identical, including letter case on Linux.
-
 ## 3. Discover your instance’s API address
 
 Open this address in your browser, replacing the example domain:
